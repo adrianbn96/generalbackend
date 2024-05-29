@@ -36,19 +36,4 @@ pipeline {
             }
         }
     }
-
-    post {
-        always {
-            // Clean up workspace after build
-            cleanWs()
-        }
-        success {
-            // Notify success
-            echo 'Build successful!'
-        }
-        failure {
-            // Notify failure
-            echo 'Build failed!'
-        }
-    }
 }
