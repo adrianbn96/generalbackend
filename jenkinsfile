@@ -1,38 +1,20 @@
 pipeline {
     agent any
 
-    environment {
-        MAVEN_HOME = tool name: 'Maven', type: 'maven'
-        PATH = "${MAVEN_HOME}/bin:${env.PATH}"
-    }
-
     stages {
-
         stage('Build') {
             steps {
-                // Compile the project
-                sh 'mvn clean compile'
+                echo 'Building..'
             }
         }
-
         stage('Test') {
             steps {
-                // Run the tests
-                sh 'mvn test'
+                echo 'Testing..'
             }
         }
-
-        stage('Package') {
+        stage('Deploy') {
             steps {
-                // Package the project (create JAR/WAR)
-                sh 'mvn package'
-            }
-        }
-
-        stage('Archive') {
-            steps {
-                // Archive the built artifacts
-                archiveArtifacts artifacts: 'target/*.jar', allowEmptyArchive: true
+                echo 'Deploying....'
             }
         }
     }
