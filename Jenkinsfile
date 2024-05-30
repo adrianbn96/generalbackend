@@ -1,16 +1,15 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.8.5-openjdk-11'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
-
+    agent any
+    
     stages {
         stage('Build') {
             steps {
-                echo 'Building..'
-                sh 'mvn clean compile'
+                script {
+                    // Utiliza el comando `mvn` para ejecutar tus metas de Maven
+                    def mvnHome = tool 'Maven'
+                    def mvnCmd = "${mvnHome}/bin/mvn"
+                    sh "${mvnCmd} clean compile"
+                }
             }
         }
     }
